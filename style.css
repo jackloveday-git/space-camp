@@ -1,0 +1,60 @@
+body {
+    font-family: monospace;
+}
+header {
+    background-image: url(IMG/milky-way-picture.jpeg);
+    
+}
+
+.banner{
+    text-align: center;
+    font-size: 40px;
+    font-family: monospace;
+    color: #fff;
+}
+
+.banner p {
+    
+    text-align: center;
+    font-size: 30px;
+    margin: 10px;
+}
+
+.search {
+    text-align:  center;
+    margin: 50px;
+}
+input {
+    position: relative;
+    display: inline-block;
+    font-size: 20px;
+    box-sizing: border-box;
+    transition: .5s;
+
+}
+.pure-input-rounded {
+    background: #fff;
+    width: 500px;
+    height: 50px;
+    border: none;
+    outline: none;
+    padding: 0 25px;
+    border-radius: 25px 0 0 25px;
+    border: 10px solid black;
+    margin: 10px ;
+}
+
+.pure-button {
+    font-size: 20px;
+    position: relative;
+    border-radius: 25px;
+    width: 150px;
+    height: 50px;
+    border: none;
+    outline: none;
+    margin: 10px;
+}
+
+.showcase-apis {
+    font-size: 25px;
+}
