@@ -82,20 +82,6 @@ fetch(marsRoverAPI)
     parentDiv.append(curiosityPic);
   });
 
-// //mars weather api
-
-// var marsWeatherAPI =
-//   "https://api.nasa.gov/insight_weather/?api_key=eBc5E7OlXwmDVp6ickMUuJ4CFFJowISz8pb6HMnp&feedtype=json&ver=1.0";
-// //fetch request using stored API variable
-// fetch(marsWeatherAPI)
-//   .then(function (nasaResponse) {
-//     return nasaResponse.json();
-//   })
-//   .then(function (nasaResponse) {
-//     console.log(nasaResponse);
-//     console.log(nasaResponse.validity_checks);
-//   });
-
 //---------------people in space API--------------
 var peopleInSpaceAPI = "http://api.open-notify.org/astros.json";
 
