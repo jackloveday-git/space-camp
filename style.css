@@ -1,8 +1,14 @@
+html {
+    background-image: url(IMG/milky-way-picture.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 body {
     font-family: monospace;
 }
 header {
-    background-image: url(IMG/milky-way-picture.jpeg);
+    
     
 }
 
@@ -14,7 +20,6 @@ header {
 }
 
 .banner p {
-    
     text-align: center;
     font-size: 30px;
     margin: 10px;
@@ -30,7 +35,7 @@ input {
     font-size: 20px;
     box-sizing: border-box;
     transition: .5s;
-
+    max-width: 100%;
 }
 .pure-input-rounded {
     background: #fff;
@@ -57,4 +62,11 @@ input {
 
 .showcase-apis {
     font-size: 25px;
+}
+
+.api {
+    border-top: 1px solid lightgray;
+    padding: 15px 0 30px 15px;
+    text-align: center;
+    color: white;
 }
