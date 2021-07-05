@@ -3,55 +3,71 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
-    <link rel="stylesheet" href="./style.css"/>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/purecss@2.0.6/build/pure-min.css"
+      integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./style.css" />
     <title>Spacecamp</title>
   </head>
   <body>
     <!--header start -->
     <header>
-    <div class="banner">
-      <h1 class="banner-head fas fa-user-astronaut"> SpaceCamp</h1>
+      <div class="banner">
+        <h1 class="banner-head fas fa-user-astronaut">SpaceCamp</h1>
         <p>Welcome to SpaceCamp</p>
-    </div>
+      </div>
 
-    <!--Search form start -->
-    <div class="search">
+      <!--Search form start -->
+      <div class="search">
         <form class="pure-form">
-            <input type="text" class="pure-input-rounded" placeholder="Search..."/>
-            <button type="submit" class="pure-button">Search</button>
+          <input
+            type="text"
+            class="pure-input-rounded"
+            id="pure-input-rounded"
+            placeholder="Search..."
+          />
+          <button type="submit" class="pure-button" id="pure-button">
+            Search
+          </button>
         </form>
-    </div>
+        <div id="title-div"></div>
+      </div>
 
-    <!--Search form end -->
-    <!-- End of header-->
+      <!--Search form end -->
+      <!-- End of header-->
     </header>
     <!--Showcase APIs start -->
     <section class="showcase-apis">
-        <div class="parent1 api">
-          <div class="visible">Test</div>
-          <div class="hidden."></div>
-        </div>
-        <div class="parent2 api">
-          <div class="visible">Test2</div>
-          <div class="hidden."></div>
-        </div>
-        <div class="parent3 api">
-          <div class="visible">Test3</div>
-          <div class="hidden."></div>
-        </div>
-        <div class="parent4 api">
-          <div class="visible">Test4</div>
-          <div class="hidden."></div>
-        </div>
-        <div class="parent5 api">
-          <div class="visible">Test5</div>
-          <div class="hidden."></div>
-        </div>
-      </section>
+      <div class="parent1" id="parent1">
+        <div class="visible">Test</div>
+        <div class="hidden."></div>
+      </div>
+      <div class="parent2" id="parent2">
+        <div class="visible">Test2</div>
+        <div class="hidden."></div>
+      </div>
+      <div class="parent3">
+        <div class="visible">Test3</div>
+        <div class="hidden."></div>
+      </div>
+      <div class="parent4">
+        <div class="visible">Test4</div>
+        <div class="hidden."></div>
+      </div>
+      <div class="parent5">
+        <div class="visible">Test5</div>
+        <div class="hidden."></div>
+      </div>
+    </section>
     <!--Showcase APIs end -->
     <!-- Font Awesome-->
-    <script src="https://kit.fontawesome.com/a0b893609a.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/a0b893609a.js"
+      crossorigin="anonymous"
+    ></script>
     <!--link to jquery library-->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <!--link to moment.js library-->
