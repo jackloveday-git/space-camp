@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link href="./assets/css/style.css" rel="stylesheet" />
+
+    <title>Spacecamp</title>
+  </head>
+  <body>
+    <!--header start -->
+    <header>
+      <h1>Spacecamp</h1>
+      <p>description paragraph</p>
+    </header>
+    <!--header end -->
+
+    <!--Search form start -->
+    <div class="search">
+      <h2>Search for NASA</h2>
+      <form action="/form/submit" method="GET">
+        <input
+          type="text"
+          name="text"
+          class="search"
+          placeholder="Search here!"
+        />
+        <input type="submit" name="submit" class="submit" value="Search" />
+      </form>
+    </div>
+    <!--Search form end -->
+
+    <!--Showcase APIs start -->
+    <section class="Showcase-APIs">
+      <div class="parent1">
+        <div class="visible"></div>
+        <div class="hidden"></div>
+      </div>
+
+      <div class="parent2">
+        <div class="visible"></div>
+        <div class="hidden"></div>
+      </div>
+
+      <div class="parent3">
+        <div class="visible"></div>
+        <div class="hidden"></div>
+      </div>
+
+      <div class="parent4">
+        <div class="visible"></div>
+        <div class="hidden"></div>
+      </div>
+
+      <div class="parent5">
+        <div class="visible"></div>
+        <div class="hidden"></div>
+      </div>
+    </section>
+    <!--Showcase APIs ends -->
+
+    <!--link to jquery library-->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!--link to moment.js library-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <!--Link to local js file-->
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>
