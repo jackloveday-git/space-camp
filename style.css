@@ -37,6 +37,24 @@ input {
     transition: .5s;
     max-width: 100%;
 }
+
+a:link {
+    color: white;
+}
+
+a {
+    margin: 0 10px;
+}
+
+#title-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 25%;
+    margin: auto;
+}
+
 .pure-input-rounded {
     background: #fff;
     width: 500px;
