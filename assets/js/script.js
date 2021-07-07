@@ -33,8 +33,8 @@ var searchBtn = $("#pure-button").on("click", function (event) {
             .attr(
               "href",
               "http://en.wikipedia.org/?curid=" +
-                //reference object "pageid" at position "i"
-                wikiResponse.query.search[i].pageid
+              //reference object "pageid" at position "i"
+              wikiResponse.query.search[i].pageid
             )
             //target _blank to open new tab when clicked
             .attr("target", "_blank");
@@ -72,17 +72,22 @@ fetch(marsRoverAPI)
     //variable to hold array of pictures
     var picArray = nasaResponse.photos;
     //reference parent DIV from HTML file
-    var parentDiv = $("#parent1");
+    var parentDiv = $("#parent3");
     //pick from most recent set of pictures at random (perseverance)
     var randomPic = picArray[Math.floor(Math.random() * picArray.length)];
     console.log(randomPic);
     //create img element to hold picture
     var curiosityPic = $("<img></img>").attr("src", randomPic.img_src);
 
+    //JL- Adding title for section
+    let curTitle = $("<div></div>").attr("id", "roverTitle");
+    $(curTitle).html("<h1>Mars Rover Photos</h1>");
+
     //create div that will hold the description
-    var divForText = $("<div></div>").attr("id", "extra1").addClass("hidden");
-    //append img div to parent el //append div to parentDiv
-    parentDiv.append(curiosityPic, divForText);
+    var divForText = $("<div></div>").attr("id", "extra3").addClass("hidden");
+
+    //append img div to parent el //append div to parentDiv                                         -JL Appended title infront
+    parentDiv.append(curTitle, curiosityPic, divForText);
 
     var cameraName = $("<h3></h3>").text(
       "Camera Name: " + randomPic.camera.full_name
@@ -111,8 +116,8 @@ var peopleInSpace = function () {
     })
     .then(function (response) {
       console.log(response);
-      //reference parent2 DIV from HTML file
-      var parentDiv = $("#parent2");
+      //reference parent4 DIV from HTML file
+      var parentDiv = $("#parent4");
       //display total people
       var divForTotal = $("<div></div>");
       //text for total people in space
@@ -126,7 +131,7 @@ var peopleInSpace = function () {
       parentDiv.append(divForTotal);
 
       //create div to hold information
-      var extraDiv = $("<div></div>").attr("id", "extra2").addClass("hidden");
+      var extraDiv = $("<div></div>").attr("id", "extra4").addClass("hidden");
       //append new div to parent el
       parentDiv.append(divForTotal, extraDiv);
 
@@ -165,6 +170,68 @@ var peopleInSpace = function () {
 };
 
 peopleInSpace();
+
+
+// --- ASTRONOMY PICTURE OF THE DAY ---
+//NASA API
+const nasaKEY = "eBc5E7OlXwmDVp6ickMUuJ4CFFJowISz8pb6HMnp";
+//Picture of the day api link
+const apodHTTPS = "https://api.nasa.gov/planetary/apod";
+fetchPOD();
+
+function fetchPOD() {
+  var peopleInSpaceAPI = "http://api.open-notify.org/astros.json";
+
+  let fetchLink = `${apodHTTPS}?api_key=${nasaKEY}`
+
+  fetch(fetchLink)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      let apodObj = data;
+      displayAPOD(apodObj);
+    });
+}
+function displayAPOD(object) {
+  console.log("APOD", object);
+  let imgURL = object.url;
+  let imgDesc = object.explanation;
+  var imgTitle = $("<h3></h3>").text(object.title);
+
+  var parentDiv = $("#parent2");
+  var apodIMG = $("<img></img>").attr("src", imgURL);
+
+  let curTitle = $("<div></div>").attr("id", "apodTitle");
+  $(curTitle).html("<h1>Astronomy Picture of the Day</h1>");
+  var divForText = $("<div></div>").attr("id", "extra2").addClass("hidden");
+
+  divForText.append(imgTitle, imgDesc);
+  parentDiv.append(curTitle, apodIMG, divForText);
+}
+
+
+displayAbout();
+
+function displayAbout() {
+  var aboutText = $("<h6></h6>").text("We are a 4-man group of student developers who created this website in hopes of sparking education and fun space fact seeking. This website uses multiple open NASA APIs to give you various forms of live space media, as well as some facts like who and how many people are currently in space.");
+  var parentDiv = $("#parent1");
+
+  let curTitle = $("<div></div>").attr("id", "aboutTitle");
+  $(curTitle).html("<h1>About Us</h1>");
+  var divForText = $("<div></div>").attr("id", "extra1").addClass("hidden");
+
+  divForText.append(aboutText);
+  parentDiv.append(curTitle, divForText);
+}
+
+
+
+
+
+
+
+//Description Div
 
 //set to not visible to start
 var isVisible = false;
@@ -207,3 +274,45 @@ var hideAndVisible2 = function () {
 
 //show and hide number of people in space information
 hideAndVisible2();
+
+//set to not visible to start
+var isVisible = false;
+//when clicked, more information is loaded in parent el 4
+var hideAndVisible3 = function () {
+  $(".parent3").on("click", function () {
+    //if element is visible, hide if hidden, make visible
+    if (isVisible === true) {
+      var extraDiv = $("#extra3");
+      extraDiv.addClass("hidden");
+      return (isVisible = false);
+    } else {
+      var extraDiv = $("#extra3");
+      extraDiv.removeClass("hidden");
+      return (isVisible = true);
+    }
+  });
+};
+
+//show and hide number of people in space information
+hideAndVisible3();
+
+//set to not visible to start
+var isVisible = false;
+//when clicked, more information is loaded in parent el 4
+var hideAndVisible4 = function () {
+  $(".parent4").on("click", function () {
+    //if element is visible, hide if hidden, make visible
+    if (isVisible === true) {
+      var extraDiv = $("#extra4");
+      extraDiv.addClass("hidden");
+      return (isVisible = false);
+    } else {
+      var extraDiv = $("#extra4");
+      extraDiv.removeClass("hidden");
+      return (isVisible = true);
+    }
+  });
+};
+
+//show and hide number of people in space information
+hideAndVisible4();
