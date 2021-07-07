@@ -107,7 +107,7 @@ fetch(marsRoverAPI)
 //---------------people in space API--------------
 
 var peopleInSpace = function () {
-  var peopleInSpaceAPI = "https://api.open-notify.org/astros.json";
+  var peopleInSpaceAPI = "http://api.open-notify.org/astros.json";
 
   //fetch request using stored API variable
   fetch(peopleInSpaceAPI)
@@ -193,26 +193,38 @@ function fetchPOD() {
 }
 function displayAPOD(object) {
   console.log("APOD", object);
-  let imgURL = object.url;
-  let imgDesc = object.explanation;
+  let objURL = object.url;
+  console.log(objURL);
+  let objType = object.media_type;
+  console.log(objType);
+
+  //var apodIMG;
+  if (objType == "video") {
+      var apodIMG = $("<iframe></iframe>").attr("src", objURL).attr("height", "720").attr("width", "1080");
+  } else {
+      var apodIMG = $("<img></img>").attr("src", objURL);
+  }
+  console.log(apodIMG);
+  let objDesc = object.explanation;
   var imgTitle = $("<h3></h3>").text(object.title);
+  var imgSubtitle = $("<h6></h6>").text("And sometimes videos..");
 
   var parentDiv = $("#parent2");
-  var apodIMG = $("<img></img>").attr("src", imgURL);
+
 
   let curTitle = $("<div></div>").attr("id", "apodTitle");
   $(curTitle).html("<h1>Astronomy Picture of the Day</h1>");
   var divForText = $("<div></div>").attr("id", "extra2").addClass("hidden");
 
-  divForText.append(imgTitle, imgDesc);
-  parentDiv.append(curTitle, apodIMG, divForText);
+  divForText.append(imgTitle, objDesc);
+  parentDiv.append(curTitle, imgSubtitle, apodIMG, divForText);
 }
 
 
 displayAbout();
 
 function displayAbout() {
-  var aboutText = $("<h6></h6>").text("We are a 4-man group of student developers who created this website in hopes of sparking education and fun space fact seeking. This website uses multiple open NASA APIs to give you various forms of live space media, as well as some facts like who and how many people are currently in space.");
+  var aboutText = $("<h6></h6>").text("We are a 5-man group of student developers who created this website in hopes of sparking education and fun space fact seeking. This website uses multiple open NASA APIs to give you various forms of live space media, as well as some facts like who and how many people are currently in space.");
   var parentDiv = $("#parent1");
 
   let curTitle = $("<div></div>").attr("id", "aboutTitle");
