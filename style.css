@@ -1,11 +1,15 @@
 html {
-    background-image: url(IMG/milky-way-picture.jpeg);
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: #f6f6f6;
 }
 
 body {
     font-family: monospace;
+}
+
+header {
+    background-image: url(IMG/milky-way-picture.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .banner{
@@ -65,7 +69,6 @@ input {
     border-bottom: 1px solid lightgray;
     padding: 30px 0 30px;
     text-align: center;
-    color: white;
 }
 
 img {
