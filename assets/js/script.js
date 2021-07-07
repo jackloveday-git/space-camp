@@ -7,7 +7,7 @@ var searchBtn = $("#pure-button").on("click", function (event) {
   var inputVal = $("#pure-input-rounded").val();
   //create variable to hold API end-point and inputValue
   var wikiApi =
-    "http://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=" +
+    "https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=" +
     inputVal +
     " space" +
     "&origin=*";
@@ -107,7 +107,7 @@ fetch(marsRoverAPI)
 //---------------people in space API--------------
 
 var peopleInSpace = function () {
-  var peopleInSpaceAPI = "http://api.open-notify.org/astros.json";
+  var peopleInSpaceAPI = "https://api.open-notify.org/astros.json";
 
   //fetch request using stored API variable
   fetch(peopleInSpaceAPI)
@@ -180,8 +180,6 @@ const apodHTTPS = "https://api.nasa.gov/planetary/apod";
 fetchPOD();
 
 function fetchPOD() {
-  var peopleInSpaceAPI = "http://api.open-notify.org/astros.json";
-
   let fetchLink = `${apodHTTPS}?api_key=${nasaKEY}`
 
   fetch(fetchLink)
