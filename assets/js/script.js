@@ -165,6 +165,7 @@ hideAndVisible1();
 /*-------------------------------------
 PARENT 2 - ASTRONOMY PICTURE OF THE DAY
 -------------------------------------*/
+// --- ASTRONOMY PICTURE OF THE DAY ---
 //NASA API
 const nasaKEY = "eBc5E7OlXwmDVp6ickMUuJ4CFFJowISz8pb6HMnp";
 //Picture of the day api link
@@ -184,27 +185,42 @@ function fetchPOD() {
     });
 }
 function displayAPOD(object) {
-  //create variables to hold returned data from fetch request
-  let imgURL = object.url;
-  let imgDesc = object.explanation;
-  //create title element to hold section title
+  //create variables to show returned data from fetch request
+  let objURL = object.url;
+  let objType = object.media_type;
+
+  //var apodIMG; // if statement to accept videos
+  if (objType == "video") {
+    //create iframe element if ObjType is video
+    var apodIMG = $("<iframe></iframe>")
+      .attr("src", objURL)
+      .attr("height", "720")
+      .attr("width", "1080");
+  } else {
+    //create img if objtype is picture
+    var apodIMG = $("<img></img>").attr("src", objURL);
+  }
+
+  //variable that holds hidden picture description
+  let objDesc = object.explanation;
+  //create variable to hold title
   var imgTitle = $("<h3></h3>").text(object.title);
+  //create variable to hold subtitle
+  var imgSubtitle = $("<h6></h6>").text("And sometimes videos..");
 
-  //reference parent #2 div from HTML
+  //reference parentDiv 2 from HTML
   var parentDiv = $("#parent2");
-  //create img element to hold picture of the day
-  var apodIMG = $("<img></img>").attr("src", imgURL);
 
-  //create div to hold title
+  //create title div
   let curTitle = $("<div></div>").attr("id", "apodTitle");
   $(curTitle).html("<h1>Astronomy Picture of the Day</h1>");
-  //create extra div with hidden class to expand and retract information
+  //create div for hidden text
   var divForText = $("<div></div>").attr("id", "extra2").addClass("hidden");
 
-  //append img desc and img title to hidden div
-  divForText.append(imgTitle, imgDesc);
-  //append title, img and hidden div to parent div
-  parentDiv.append(curTitle, apodIMG, divForText);
+  //append img title and picture description to hidden div
+  divForText.append(imgTitle, objDesc);
+  //append title, subtitle, img and hidden div to parent div
+  parentDiv.append(curTitle, imgSubtitle, apodIMG, divForText);
 }
 
 //set to not visible to start
@@ -367,24 +383,3 @@ var peopleInSpace = function () {
 };
 
 peopleInSpace();
-
-//set to not visible to start
-var isVisible = false;
-//when clicked, more information is loaded in parent el 4
-var hideAndVisible4 = function () {
-  $(".parent4").on("click", function () {
-    //if element is visible, hide if hidden, make visible
-    if (isVisible === true) {
-      var extraDiv = $("#extra4");
-      extraDiv.addClass("hidden");
-      return (isVisible = false);
-    } else {
-      var extraDiv = $("#extra4");
-      extraDiv.removeClass("hidden");
-      return (isVisible = true);
-    }
-  });
-};
-
-//show and hide number of people in space information
-hideAndVisible4();
