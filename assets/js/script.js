@@ -383,3 +383,24 @@ var peopleInSpace = function () {
 };
 
 peopleInSpace();
+
+//set to not visible to start
+var isVisible = false;
+//when clicked, more information is loaded in parent el 4
+var hideAndVisible4 = function () {
+  $(".parent4").on("click", function () {
+    //if element is visible, hide if hidden, make visible
+    if (isVisible === true) {
+      var extraDiv = $("#extra4");
+      extraDiv.addClass("hidden");
+      return (isVisible = false);
+    } else {
+      var extraDiv = $("#extra4");
+      extraDiv.removeClass("hidden");
+      return (isVisible = true);
+    }
+  });
+};
+
+//show and hide mars rover picture information
+hideAndVisible4();
