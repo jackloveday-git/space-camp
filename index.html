@@ -3,12 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Fixes live reload issue-->
+    <link rel="shortcut icon" href="#" />
+    <!--link to pure.css library-->
     <link
       rel="stylesheet"
       href="https://unpkg.com/purecss@2.0.6/build/pure-min.css"
       integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5"
       crossorigin="anonymous"
     />
+    <!--link to local stylesheet-->
     <link rel="stylesheet" href="./style.css" />
     <title>Spacecamp</title>
   </head>
@@ -18,7 +22,9 @@
       <div class="banner">
         <h1 class="banner-head fas fa-user-astronaut">SpaceCamp</h1>
         <p>Welcome to SpaceCamp</p>
-        <p style="font-size: 35%;">* Click on any of the boxes or titles below for more info! *</p>
+        <p style="font-size: 35%">
+          * Click on any of the boxes or titles below for more info! *
+        </p>
       </div>
 
       <!--Search form start -->
@@ -34,6 +40,7 @@
             Search
           </button>
         </form>
+        <div id="history"></div>
         <div id="title-div"></div>
       </div>
 
@@ -42,26 +49,26 @@
     </header>
     <!--Showcase APIs start -->
     <section class="showcase-apis">
+      <!--Showcase for About us-->
       <div class="parent1 api" id="parent1">
         <div class="visible"></div>
         <div class="hidden"></div>
       </div>
+      <!--Showcase for Astronomy Picture of the Day-->
       <div class="parent2 api" id="parent2">
         <div class="visible"></div>
         <div class="hidden"></div>
       </div>
+      <!--Showcase for Mars Rover Picture-->
       <div class="parent3 api" id="parent3">
         <div class="visible"></div>
         <div class="hidden"></div>
       </div>
+      <!--Showcase for people in space-->
       <div class="parent4 api" id="parent4">
         <div class="visible"></div>
         <div class="hidden"></div>
       </div>
-      <!-- <div class="parent5">
-        <div class="visible">Test5</div>
-        <div class="hidden"></div>
-      </div> -->
     </section>
     <!--Showcase APIs end -->
     <!-- Font Awesome-->
