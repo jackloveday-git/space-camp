@@ -38,6 +38,13 @@ header {
   margin: 10px;
 }
 
+.instructions1 {
+  color: #fff;
+  width: 100%;
+  margin-top: 0;
+  text-align: center;
+}
+
 /*styling for search btn and form parent element*/
 .search {
   text-align: center;
@@ -118,6 +125,13 @@ Styling for header ENDS
 /*------------------------------
 Styling for SHOWCASE APIS STARTS
 ------------------------------*/
+.instructions2 {
+  color: black;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
 /*parent div styling for showcase APIs*/
 .showcase-apis {
   font-size: 25px;
