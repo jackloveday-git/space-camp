@@ -1,105 +1,153 @@
+/*-------------------------------
+Global Styling for webpage starts
+-------------------------------*/
 html {
-    background-color: #f6f6f6;
+  background-color: #f6f6f6;
 }
 
 body {
-    font-family: monospace;
+  font-family: monospace;
 }
 
+/*-----------------------------
+Global Styling for webpage ends
+-----------------------------*/
+
+/*-----------------------
+Styling for header begins
+-----------------------*/
+/*background styling*/
 header {
-    background-image: url(IMG/milky-way-picture.jpeg);
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-image: url(IMG/milky-way-picture.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.banner{
-    text-align: center;
-    font-size: 40px;
-    font-family: monospace;
-    color: #fff;
+/*styling for text*/
+.banner {
+  text-align: center;
+  font-size: 40px;
+  font-family: monospace;
+  color: #fff;
 }
 
+/*styling for p element*/
 .banner p {
-    text-align: center;
-    font-size: 30px;
-    margin: 10px;
+  text-align: center;
+  font-size: 30px;
+  margin: 10px;
 }
 
+/*styling for search btn and form parent element*/
 .search {
-    text-align:  center;
-    margin: 50px;
+  text-align: center;
+  margin: 50px;
 }
+
+/*input bar styling*/
 input {
-    position: relative;
-    display: inline-block;
-    font-size: 20px;
-    box-sizing: border-box;
-    transition: .5s;
-    max-width: 100%;
+  position: relative;
+  display: inline-block;
+  font-size: 20px;
+  box-sizing: border-box;
+  transition: 0.5s;
+  max-width: 100%;
 }
 
-a:link {
-    color: white;
-}
-
-a {
-    margin: 0 10px;
-}
-
-#title-div {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    width: 25%;
-    margin: auto;
-}
-
+/*styling for nput section*/
 .pure-input-rounded {
-    background: #fff;
-    width: 500px;
-    height: 50px;
-    border: none;
-    outline: none;
-    padding: 0 25px;
-    border-radius: 25px 0 0 25px;
-    border: 10px solid black;
-    margin: 10px ;
+  background: #fff;
+  width: 500px;
+  height: 50px;
+  border: none;
+  outline: none;
+  padding: 0 25px;
+  border-radius: 25px 0 0 25px;
+  border: 10px solid black;
+  margin: 10px;
 }
 
+/*styling for search button*/
 .pure-button {
-    font-size: 20px;
-    position: relative;
-    border-radius: 25px;
-    width: 150px;
-    height: 50px;
-    border: none;
-    outline: none;
-    margin: 10px;
+  font-size: 20px;
+  position: relative;
+  border-radius: 25px;
+  width: 150px;
+  height: 50px;
+  border: none;
+  outline: none;
+  margin: 10px;
 }
 
+/*styling for dynamically generated wiki links*/
+#title-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 25%;
+  margin: auto;
+}
+
+/*styling for searched history buttons*/
+.history-btn {
+  width: fit-content;
+  background-color: aquamarine;
+}
+
+/*anchor link styling*/
+a:link {
+  color: white;
+}
+
+/*anchor styling*/
+a {
+  margin: 0 10px;
+}
+
+/*styling for wikipedia link (buttons)*/
+.wiki-button {
+  width: 100%;
+  background-color: rgb(255, 242, 127);
+}
+
+/*---------------------
+Styling for header ENDS
+---------------------*/
+
+/*------------------------------
+Styling for SHOWCASE APIS STARTS
+------------------------------*/
+/*parent div styling for showcase APIs*/
 .showcase-apis {
-    font-size: 25px;
+  font-size: 25px;
 }
 
+/*api styling*/
 .api {
-    border-top: 1px solid lightgray;
-    border-bottom: 1px solid lightgray;
-    padding: 30px 0 30px;
-    text-align: center;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  padding: 30px 0 30px;
+  text-align: center;
 }
 
+/*api img styling*/
 img {
-    max-height: 30%;
-    max-width: 30%;
+  max-height: 30%;
+  max-width: 30%;
 }
 
+/*api list styling*/
 li {
-    list-style-type: none;
-    margin: 30px 0 30px 0;
-    font-size: 30px;
+  list-style-type: none;
+  margin: 30px 0 30px 0;
+  font-size: 30px;
 }
 
+/*hidden class styling - to make text appear and disappear*/
 .hidden {
-    display: none;
+  display: none;
 }
+/*----------------------------
+Styling for SHOWCASE APIS ENDS
+----------------------------*/
