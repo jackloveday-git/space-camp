@@ -144,7 +144,7 @@ function displayAbout() {
 
   //INTRODUCTION TO THE GROUP - Create text block
   var aboutText = $("<h6></h6>").text(
-    "We are a 5-man group of student developers who created this website in hopes of sparking education and fun space fact seeking. This website uses multiple open NASA APIs to give you various forms of live space media, as well as some facts like who and how many people are currently in space."
+    "We are a 5-man group of student developers who created this website in hopes of sparking education and fun space fact seeking. This website uses multiple open NASA APIs to give you various forms of live space media. With a lot of room for expansion, expect to see updates in the near future!"
   );
   //append text to div for text
   divForText.append(aboutText);
@@ -261,50 +261,61 @@ PARENT 3 - MARS ROVER
 //mars photos from perseverance rover (most recent was 2 days ago)
 var currentDate = moment().subtract(2, "days").format("YYYY-MM-DD");
 
-var marsRoverAPI =
-  "https://api.nasa.gov/mars-photos/api/v1/rovers/perseverance/photos?earth_date=" +
-  currentDate +
-  "&api_key=eBc5E7OlXwmDVp6ickMUuJ4CFFJowISz8pb6HMnp";
-//fetch request using stored API variable
-fetch(marsRoverAPI)
-  .then(function (nasaResponse) {
-    return nasaResponse.json();
-  })
-  .then(function (nasaResponse) {
-    //variable to hold array of pictures
-    var picArray = nasaResponse.photos;
-    //reference parent DIV from HTML file
-    var parentDiv = $("#parent3");
-    //pick from most recent set of pictures at random (perseverance)
-    var randomPic = picArray[Math.floor(Math.random() * picArray.length)];
+var perseveranceFetch = function () {
+  var persRoverAPI =
+    "https://api.nasa.gov/mars-photos/api/v1/rovers/perseverance/photos?earth_date=" +
+    currentDate +
+    "&api_key=eBc5E7OlXwmDVp6ickMUuJ4CFFJowISz8pb6HMnp";
+  //fetch request using stored API variable
+  fetch(persRoverAPI)
+    .then(function (persResponse) {
+      return persResponse.json();
+    })
+    .then(function (persResponse) {
+      perseveranceDisplay(persResponse);
+    });
+};
 
-    //create img element to hold picture
-    var curiosityPic = $("<img></img>").attr("src", randomPic.img_src);
+//function to display perseverance picture
+var perseveranceDisplay = function (persResponse) {
+  //variable to hold array of pictures
+  var picArray = persResponse.photos;
+  //reference parent DIV from HTML file
+  var parentDiv = $("#parent3");
+  //pick from most recent set of pictures at random (perseverance)
+  var randomPic = picArray[Math.floor(Math.random() * picArray.length)];
 
-    //JL- Adding title for section
-    let curTitle = $("<div></div>").attr("id", "roverTitle");
-    $(curTitle).html("<h1>Mars Rover Photo</h1>");
+  //create img element to hold picture
+  var perPic = $("<img></img>").attr("src", randomPic.img_src);
 
-    //create div that will hold the description
-    var divForText = $("<div></div>").attr("id", "extra3").addClass("hidden");
+  //JL- Adding title for section
+  var perTitle = $("<div></div>").attr("id", "roverTitle");
+  $(perTitle).html("<h1>Mars Rover Photo</h1>");
 
-    //append img div to parent el //append div to parentDiv                                         -JL Appended title infront
-    parentDiv.append(curTitle, curiosityPic, divForText);
+  //create div that will hold the description
+  var divForText = $("<div></div>").attr("id", "extra3").addClass("hidden");
 
-    var cameraName = $("<h3></h3>").text(
-      "Camera Name: " + randomPic.camera.full_name
-    );
-    var pictureDate = $("<h3></h3>").text(
-      "Earth Date: " + randomPic.earth_date
-    );
+  //append img div to parent el //append div to parentDiv                                         -JL Appended title infront
+  parentDiv.append(perTitle);
+  perTitle.append(perPic, divForText);
 
-    var roverName = $("<h3></h3>").text("Rover Name: " + randomPic.rover.name);
+  //display camera name
+  var cameraName = $("<h3></h3>").text(
+    "Camera Name: " + randomPic.camera.full_name
+  );
+  //display date picture taken
+  var pictureDate = $("<h3></h3>").text("Earth Date: " + randomPic.earth_date);
 
-    var roverLandDate = $("<h3></h3>").text(
-      "Date Landed: " + randomPic.rover.landing_date
-    );
-    divForText.append(cameraName, pictureDate, roverName, roverLandDate);
-  });
+  //display rover name
+  var roverName = $("<h3></h3>").text("Rover Name: " + randomPic.rover.name);
+
+  //display date rover landed
+  var roverLandDate = $("<h3></h3>").text(
+    "Date Landed: " + randomPic.rover.landing_date
+  );
+  //append text to hideable div
+  divForText.append(cameraName, pictureDate, roverName, roverLandDate);
+};
 
 //set to not visible to start
 var isVisible = false;
@@ -326,7 +337,8 @@ var hideAndVisible3 = function () {
 
 //show and hide mars rover picture information
 hideAndVisible3();
-
+//fetch perseverance picture
+perseveranceFetch();
 // /*----------------------------
 // PARENT 4 - PEOPLE IN SPACE API
 // ----------------------------*/
