@@ -66,7 +66,6 @@ var loadWiki = function () {
             .addClass(
               "wiki-title (wiki-title" + i + ") pure-button wiki-button"
             );
-
           //append anchor element to parent element
           titleAnchor.append(titleEl);
 
@@ -103,13 +102,25 @@ var loadHistory = function () {
     var historyEl = $("#history");
     // create button element for search history
     var historyBtn = $("<button></button>")
-      .text(newSearchName)
+      .text(newSearchName + " ")
       .addClass("pure-button history-btn")
+      .attr("id", "history-btn" + i)
       .on("click", function () {
         //set inputVal to desired button text
         var inputVal = $("#pure-input-rounded").val(searchInputUsed[i]);
         loadWiki();
       });
+    //span to hold "X" to remove from search history
+    var xIcon = $("<i></i>")
+      .addClass("fas fa-window-close")
+      .on("click", function () {
+        //remove from current screen
+        $("#history-btn" + i).remove();
+        //remove from localStorage
+        localStorage.removeItem(searchInputUsed[i]);
+      });
+
+    historyBtn.append(xIcon);
     // append history button to HTML div
     historyEl.append(historyBtn);
   }
@@ -133,7 +144,7 @@ function displayAbout() {
 
   //INTRODUCTION TO THE GROUP - Create text block
   var aboutText = $("<h6></h6>").text(
-    "We are a 5-man group of student developers who created this website in hopes of sparking education and fun space fact seeking. This website uses multiple open NASA APIs to give you various forms of live space media, as well as some facts like who and how many people are currently in space."
+    "We are a 5-man group of student developers who created this website in hopes of sparking education and fun space fact seeking. This website uses multiple open NASA APIs to give you various forms of live space media. With a lot of room for expansion, expect to see updates in the near future!"
   );
   //append text to div for text
   divForText.append(aboutText);
@@ -250,50 +261,61 @@ PARENT 3 - MARS ROVER
 //mars photos from perseverance rover (most recent was 2 days ago)
 var currentDate = moment().subtract(2, "days").format("YYYY-MM-DD");
 
-var marsRoverAPI =
-  "https://api.nasa.gov/mars-photos/api/v1/rovers/perseverance/photos?earth_date=" +
-  currentDate +
-  "&api_key=eBc5E7OlXwmDVp6ickMUuJ4CFFJowISz8pb6HMnp";
-//fetch request using stored API variable
-fetch(marsRoverAPI)
-  .then(function (nasaResponse) {
-    return nasaResponse.json();
-  })
-  .then(function (nasaResponse) {
-    //variable to hold array of pictures
-    var picArray = nasaResponse.photos;
-    //reference parent DIV from HTML file
-    var parentDiv = $("#parent3");
-    //pick from most recent set of pictures at random (perseverance)
-    var randomPic = picArray[Math.floor(Math.random() * picArray.length)];
+var perseveranceFetch = function () {
+  var persRoverAPI =
+    "https://api.nasa.gov/mars-photos/api/v1/rovers/perseverance/photos?earth_date=" +
+    currentDate +
+    "&api_key=eBc5E7OlXwmDVp6ickMUuJ4CFFJowISz8pb6HMnp";
+  //fetch request using stored API variable
+  fetch(persRoverAPI)
+    .then(function (persResponse) {
+      return persResponse.json();
+    })
+    .then(function (persResponse) {
+      perseveranceDisplay(persResponse);
+    });
+};
 
-    //create img element to hold picture
-    var curiosityPic = $("<img></img>").attr("src", randomPic.img_src);
+//function to display perseverance picture
+var perseveranceDisplay = function (persResponse) {
+  //variable to hold array of pictures
+  var picArray = persResponse.photos;
+  //reference parent DIV from HTML file
+  var parentDiv = $("#parent3");
+  //pick from most recent set of pictures at random (perseverance)
+  var randomPic = picArray[Math.floor(Math.random() * picArray.length)];
 
-    //JL- Adding title for section
-    let curTitle = $("<div></div>").attr("id", "roverTitle");
-    $(curTitle).html("<h1>Mars Rover Photo</h1>");
+  //create img element to hold picture
+  var perPic = $("<img></img>").attr("src", randomPic.img_src);
 
-    //create div that will hold the description
-    var divForText = $("<div></div>").attr("id", "extra3").addClass("hidden");
+  //JL- Adding title for section
+  var perTitle = $("<div></div>").attr("id", "roverTitle");
+  $(perTitle).html("<h1>Mars Rover Photo</h1>");
 
-    //append img div to parent el //append div to parentDiv                                         -JL Appended title infront
-    parentDiv.append(curTitle, curiosityPic, divForText);
+  //create div that will hold the description
+  var divForText = $("<div></div>").attr("id", "extra3").addClass("hidden");
 
-    var cameraName = $("<h3></h3>").text(
-      "Camera Name: " + randomPic.camera.full_name
-    );
-    var pictureDate = $("<h3></h3>").text(
-      "Earth Date: " + randomPic.earth_date
-    );
+  //append img div to parent el //append div to parentDiv                                         -JL Appended title infront
+  parentDiv.append(perTitle);
+  perTitle.append(perPic, divForText);
 
-    var roverName = $("<h3></h3>").text("Rover Name: " + randomPic.rover.name);
+  //display camera name
+  var cameraName = $("<h3></h3>").text(
+    "Camera Name: " + randomPic.camera.full_name
+  );
+  //display date picture taken
+  var pictureDate = $("<h3></h3>").text("Earth Date: " + randomPic.earth_date);
 
-    var roverLandDate = $("<h3></h3>").text(
-      "Date Landed: " + randomPic.rover.landing_date
-    );
-    divForText.append(cameraName, pictureDate, roverName, roverLandDate);
-  });
+  //display rover name
+  var roverName = $("<h3></h3>").text("Rover Name: " + randomPic.rover.name);
+
+  //display date rover landed
+  var roverLandDate = $("<h3></h3>").text(
+    "Date Landed: " + randomPic.rover.landing_date
+  );
+  //append text to hideable div
+  divForText.append(cameraName, pictureDate, roverName, roverLandDate);
+};
 
 //set to not visible to start
 var isVisible = false;
@@ -315,92 +337,93 @@ var hideAndVisible3 = function () {
 
 //show and hide mars rover picture information
 hideAndVisible3();
+//fetch perseverance picture
+perseveranceFetch();
+// /*----------------------------
+// PARENT 4 - PEOPLE IN SPACE API
+// ----------------------------*/
 
-/*----------------------------
-PARENT 4 - PEOPLE IN SPACE API
-----------------------------*/
+// var peopleInSpace = function () {
+//   var peopleInSpaceAPI = "http://api.open-notify.org/astros.json";
 
-var peopleInSpace = function () {
-  var peopleInSpaceAPI = "http://api.open-notify.org/astros.json";
+//   //fetch request using stored API variable
+//   fetch(peopleInSpaceAPI)
+//     .then(function (response) {
+//       return response.json();
+//     })
+//     .then(function (response) {
+//       //reference parent4 DIV from HTML file
+//       var parentDiv = $("#parent4");
+//       //display total people
+//       var divForTotal = $("<div></div>");
+//       //text for total people in space
+//       var totalPeople = $("<h2></h2>").text(
+//         "Number of People in Space: " + response.number
+//       );
+//       //append text to new div
+//       divForTotal.append(totalPeople);
 
-  //fetch request using stored API variable
-  fetch(peopleInSpaceAPI)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (response) {
-      //reference parent4 DIV from HTML file
-      var parentDiv = $("#parent4");
-      //display total people
-      var divForTotal = $("<div></div>");
-      //text for total people in space
-      var totalPeople = $("<h2></h2>").text(
-        "Number of People in Space: " + response.number
-      );
-      //append text to new div
-      divForTotal.append(totalPeople);
+//       //append new div to parent el
+//       parentDiv.append(divForTotal);
 
-      //append new div to parent el
-      parentDiv.append(divForTotal);
+//       //create div to hold information
+//       var extraDiv = $("<div></div>").attr("id", "extra4").addClass("hidden");
+//       //append new div to parent el
+//       parentDiv.append(divForTotal, extraDiv);
 
-      //create div to hold information
-      var extraDiv = $("<div></div>").attr("id", "extra4").addClass("hidden");
-      //append new div to parent el
-      parentDiv.append(divForTotal, extraDiv);
+//       //store array of people in space to iterate through later
+//       var peopleArray = response.people;
+//       //title for ISS
+//       var issTitle = $("<h2></h2>").text(
+//         "Craft: International Space Station (ISS)"
+//       );
+//       //unordered list for all ISS astronauts
+//       var ulISS = $("<ul></ul>");
+//       //append ul to issTitle
+//       issTitle.append(ulISS);
+//       //title for tiangong space station
+//       var tiangongTitle = $("<h2></h2>").text("Craft: Tiangong Space Station");
+//       //unordered list for all tiangong astronauts
+//       var ulTiangong = $("<ul></ul>");
+//       //append ul to tiangongTitle
+//       tiangongTitle.append(ulTiangong);
 
-      //store array of people in space to iterate through later
-      var peopleArray = response.people;
-      //title for ISS
-      var issTitle = $("<h2></h2>").text(
-        "Craft: International Space Station (ISS)"
-      );
-      //unordered list for all ISS astronauts
-      var ulISS = $("<ul></ul>");
-      //append ul to issTitle
-      issTitle.append(ulISS);
-      //title for tiangong space station
-      var tiangongTitle = $("<h2></h2>").text("Craft: Tiangong Space Station");
-      //unordered list for all tiangong astronauts
-      var ulTiangong = $("<ul></ul>");
-      //append ul to tiangongTitle
-      tiangongTitle.append(ulTiangong);
+//       for (let i = 0; i < peopleArray.length; i++) {
+//         //if statement --- if craft === to ISS // if statement --- if craft === to Tiangong to place astronauts in correct list
+//         if (response.people[i].craft === "ISS") {
+//           var listText = $("<li></li>").text(response.people[i].name);
+//         }
+//         if (response.people[i].craft === "Tiangong") {
+//           var listText2 = $("<li></li>").text(response.people[i].name);
+//         }
+//         //append li elements to corresponding ul element
+//         ulISS.append(listText);
+//         ulTiangong.append(listText2);
+//       }
+//       //append titles to parent div
+//       extraDiv.append(issTitle, tiangongTitle);
+//     });
+// };
 
-      for (let i = 0; i < peopleArray.length; i++) {
-        //if statement --- if craft === to ISS // if statement --- if craft === to Tiangong to place astronauts in correct list
-        if (response.people[i].craft === "ISS") {
-          var listText = $("<li></li>").text(response.people[i].name);
-        }
-        if (response.people[i].craft === "Tiangong") {
-          var listText2 = $("<li></li>").text(response.people[i].name);
-        }
-        //append li elements to corresponding ul element
-        ulISS.append(listText);
-        ulTiangong.append(listText2);
-      }
-      //append titles to parent div
-      extraDiv.append(issTitle, tiangongTitle);
-    });
-};
+// peopleInSpace();
 
-peopleInSpace();
+// //set to not visible to start
+// var isVisible = false;
+// //when clicked, more information is loaded in parent el 4
+// var hideAndVisible4 = function () {
+//   $(".parent4").on("click", function () {
+//     //if element is visible, hide if hidden, make visible
+//     if (isVisible === true) {
+//       var extraDiv = $("#extra4");
+//       extraDiv.addClass("hidden");
+//       return (isVisible = false);
+//     } else {
+//       var extraDiv = $("#extra4");
+//       extraDiv.removeClass("hidden");
+//       return (isVisible = true);
+//     }
+//   });
+// };
 
-//set to not visible to start
-var isVisible = false;
-//when clicked, more information is loaded in parent el 4
-var hideAndVisible4 = function () {
-  $(".parent4").on("click", function () {
-    //if element is visible, hide if hidden, make visible
-    if (isVisible === true) {
-      var extraDiv = $("#extra4");
-      extraDiv.addClass("hidden");
-      return (isVisible = false);
-    } else {
-      var extraDiv = $("#extra4");
-      extraDiv.removeClass("hidden");
-      return (isVisible = true);
-    }
-  });
-};
-
-//show and hide mars rover picture information
-hideAndVisible4();
+// //show and hide mars rover picture information
+// hideAndVisible4();
