@@ -143,7 +143,7 @@ function displayAbout() {
   var divForText = $("<div></div>").attr("id", "extra1").addClass("hidden");
 
   //INTRODUCTION TO THE GROUP - Create text block
-  var aboutText = $("<h6></h6>").text(
+  var aboutText = $("<h5></h5>").text(
     "We are a 5-man group of student developers who created this website in hopes of sparking education and fun space fact seeking. This website uses multiple open NASA APIs to give you various forms of live space media. With a lot of room for expansion, expect to see updates in the near future!"
   );
   //append text to div for text
@@ -217,7 +217,7 @@ function displayAPOD(object) {
   //create variable to hold title
   var imgTitle = $("<h3></h3>").text(object.title);
   //create variable to hold subtitle
-  var imgSubtitle = $("<h6></h6>").text("And sometimes videos..");
+  var imgSubtitle = $("<h5></h5>").text("And sometimes videos..");
 
   //reference parentDiv 2 from HTML
   var parentDiv = $("#parent2");
