@@ -66,7 +66,6 @@ var loadWiki = function () {
             .addClass(
               "wiki-title (wiki-title" + i + ") pure-button wiki-button"
             );
-
           //append anchor element to parent element
           titleAnchor.append(titleEl);
 
@@ -103,13 +102,25 @@ var loadHistory = function () {
     var historyEl = $("#history");
     // create button element for search history
     var historyBtn = $("<button></button>")
-      .text(newSearchName)
+      .text(newSearchName + " ")
       .addClass("pure-button history-btn")
+      .attr("id", "history-btn" + i)
       .on("click", function () {
         //set inputVal to desired button text
         var inputVal = $("#pure-input-rounded").val(searchInputUsed[i]);
         loadWiki();
       });
+    //span to hold "X" to remove from search history
+    var xIcon = $("<i></i>")
+      .addClass("fas fa-window-close")
+      .on("click", function () {
+        //remove from current screen
+        $("#history-btn" + i).remove();
+        //remove from localStorage
+        localStorage.removeItem(searchInputUsed[i]);
+      });
+
+    historyBtn.append(xIcon);
     // append history button to HTML div
     historyEl.append(historyBtn);
   }
@@ -316,91 +327,91 @@ var hideAndVisible3 = function () {
 //show and hide mars rover picture information
 hideAndVisible3();
 
-/*----------------------------
-PARENT 4 - PEOPLE IN SPACE API
-----------------------------*/
+// /*----------------------------
+// PARENT 4 - PEOPLE IN SPACE API
+// ----------------------------*/
 
-var peopleInSpace = function () {
-  var peopleInSpaceAPI = "http://api.open-notify.org/astros.json";
+// var peopleInSpace = function () {
+//   var peopleInSpaceAPI = "http://api.open-notify.org/astros.json";
 
-  //fetch request using stored API variable
-  fetch(peopleInSpaceAPI)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (response) {
-      //reference parent4 DIV from HTML file
-      var parentDiv = $("#parent4");
-      //display total people
-      var divForTotal = $("<div></div>");
-      //text for total people in space
-      var totalPeople = $("<h2></h2>").text(
-        "Number of People in Space: " + response.number
-      );
-      //append text to new div
-      divForTotal.append(totalPeople);
+//   //fetch request using stored API variable
+//   fetch(peopleInSpaceAPI)
+//     .then(function (response) {
+//       return response.json();
+//     })
+//     .then(function (response) {
+//       //reference parent4 DIV from HTML file
+//       var parentDiv = $("#parent4");
+//       //display total people
+//       var divForTotal = $("<div></div>");
+//       //text for total people in space
+//       var totalPeople = $("<h2></h2>").text(
+//         "Number of People in Space: " + response.number
+//       );
+//       //append text to new div
+//       divForTotal.append(totalPeople);
 
-      //append new div to parent el
-      parentDiv.append(divForTotal);
+//       //append new div to parent el
+//       parentDiv.append(divForTotal);
 
-      //create div to hold information
-      var extraDiv = $("<div></div>").attr("id", "extra4").addClass("hidden");
-      //append new div to parent el
-      parentDiv.append(divForTotal, extraDiv);
+//       //create div to hold information
+//       var extraDiv = $("<div></div>").attr("id", "extra4").addClass("hidden");
+//       //append new div to parent el
+//       parentDiv.append(divForTotal, extraDiv);
 
-      //store array of people in space to iterate through later
-      var peopleArray = response.people;
-      //title for ISS
-      var issTitle = $("<h2></h2>").text(
-        "Craft: International Space Station (ISS)"
-      );
-      //unordered list for all ISS astronauts
-      var ulISS = $("<ul></ul>");
-      //append ul to issTitle
-      issTitle.append(ulISS);
-      //title for tiangong space station
-      var tiangongTitle = $("<h2></h2>").text("Craft: Tiangong Space Station");
-      //unordered list for all tiangong astronauts
-      var ulTiangong = $("<ul></ul>");
-      //append ul to tiangongTitle
-      tiangongTitle.append(ulTiangong);
+//       //store array of people in space to iterate through later
+//       var peopleArray = response.people;
+//       //title for ISS
+//       var issTitle = $("<h2></h2>").text(
+//         "Craft: International Space Station (ISS)"
+//       );
+//       //unordered list for all ISS astronauts
+//       var ulISS = $("<ul></ul>");
+//       //append ul to issTitle
+//       issTitle.append(ulISS);
+//       //title for tiangong space station
+//       var tiangongTitle = $("<h2></h2>").text("Craft: Tiangong Space Station");
+//       //unordered list for all tiangong astronauts
+//       var ulTiangong = $("<ul></ul>");
+//       //append ul to tiangongTitle
+//       tiangongTitle.append(ulTiangong);
 
-      for (let i = 0; i < peopleArray.length; i++) {
-        //if statement --- if craft === to ISS // if statement --- if craft === to Tiangong to place astronauts in correct list
-        if (response.people[i].craft === "ISS") {
-          var listText = $("<li></li>").text(response.people[i].name);
-        }
-        if (response.people[i].craft === "Tiangong") {
-          var listText2 = $("<li></li>").text(response.people[i].name);
-        }
-        //append li elements to corresponding ul element
-        ulISS.append(listText);
-        ulTiangong.append(listText2);
-      }
-      //append titles to parent div
-      extraDiv.append(issTitle, tiangongTitle);
-    });
-};
+//       for (let i = 0; i < peopleArray.length; i++) {
+//         //if statement --- if craft === to ISS // if statement --- if craft === to Tiangong to place astronauts in correct list
+//         if (response.people[i].craft === "ISS") {
+//           var listText = $("<li></li>").text(response.people[i].name);
+//         }
+//         if (response.people[i].craft === "Tiangong") {
+//           var listText2 = $("<li></li>").text(response.people[i].name);
+//         }
+//         //append li elements to corresponding ul element
+//         ulISS.append(listText);
+//         ulTiangong.append(listText2);
+//       }
+//       //append titles to parent div
+//       extraDiv.append(issTitle, tiangongTitle);
+//     });
+// };
 
-peopleInSpace();
+// peopleInSpace();
 
-//set to not visible to start
-var isVisible = false;
-//when clicked, more information is loaded in parent el 4
-var hideAndVisible4 = function () {
-  $(".parent4").on("click", function () {
-    //if element is visible, hide if hidden, make visible
-    if (isVisible === true) {
-      var extraDiv = $("#extra4");
-      extraDiv.addClass("hidden");
-      return (isVisible = false);
-    } else {
-      var extraDiv = $("#extra4");
-      extraDiv.removeClass("hidden");
-      return (isVisible = true);
-    }
-  });
-};
+// //set to not visible to start
+// var isVisible = false;
+// //when clicked, more information is loaded in parent el 4
+// var hideAndVisible4 = function () {
+//   $(".parent4").on("click", function () {
+//     //if element is visible, hide if hidden, make visible
+//     if (isVisible === true) {
+//       var extraDiv = $("#extra4");
+//       extraDiv.addClass("hidden");
+//       return (isVisible = false);
+//     } else {
+//       var extraDiv = $("#extra4");
+//       extraDiv.removeClass("hidden");
+//       return (isVisible = true);
+//     }
+//   });
+// };
 
-//show and hide mars rover picture information
-hideAndVisible4();
+// //show and hide mars rover picture information
+// hideAndVisible4();
